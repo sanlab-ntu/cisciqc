@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Signin - cisciqc</title>
+    <!-- Bootstrap core CSS -->
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+
+    <link href="css/login.css" rel="stylesheet">
+  </head>
+
+  <body> 
+      
+<nav class="navbar navbar-dark fixed-top bg-dark p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.html">cisciqc</a>
+  <ul class="navbar-nav px-3">
+    <li class="nav-item"> <!-- class="nav-link" -->
+      <a href="instructions.html" style='padding-right: 10px;color: rgba(255, 255, 255, .5);'>Instructions</a>
+      <a href="privacy.html" style='padding-right: 10px;color: rgba(255, 255, 255, .5);'>Privacy</a>
+        <a href="login.html" style='padding-right: 10px;color: rgba(255, 255, 255, .5);'>Sign In</a>
+        <a href="signup.html" style='padding-right: 10px;color: rgba(255, 255, 255, .5);'>Sign Up</a>
+    </li>
+  </ul>
+</nav>
+      
+    <main>
+    <div class="row text-center" style="margin-top: 75px">
+    <form class="form-signin" id='loginForm'>
+        
+      <h1 class="h3 mb-3 font-weight-normal">Welcome back! </h1>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        
+      <p class="mt-2 mb-3">Don't have an account? <a href="signup.html">Join us!</a></p>
+      <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+    </form>
+    </div>
+    </main>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+    $("#loginForm").submit(function() {
+        
+      //Se fino a qui e' andato tutto bene passo i dati (via POST) al file PHP che effettua le verifiche 
+      $.post("app/functions/login.php", { email: $('#inputEmail').val(), password: $('#inputPassword').val(), rand: Math.random() }, function(response) {
+        // se i dati sono corretti...
+        if (response == 1) {
+              //document.location = 'backoffice.php';
+            window.location.replace('app/dashboard.php');
+        }else{
+            // stampo un messaggio di errore
+            alert(response);
+        }
+      });
+      // evito il submit del form (che deve essere gestito solo dalla funzione Javascript)
+      return false;
+    });  
+      
+    </script>
+  </body>
+</html>
+
